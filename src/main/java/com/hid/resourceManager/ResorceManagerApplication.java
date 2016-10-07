@@ -1,9 +1,12 @@
 package com.hid.resourceManager;
 
+import com.hid.resourceManager.resourceGetters.ResourceGettersFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ServiceLocatorFactoryBean;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,6 +21,14 @@ import javax.sql.DataSource;
 @SpringBootApplication
 @Controller
 public class ResorceManagerApplication extends WebMvcConfigurerAdapter {
+
+    @Bean
+    public ServiceLocatorFactoryBean busScannerTaskFactoryBean() {
+        ServiceLocatorFactoryBean bean = new ServiceLocatorFactoryBean();
+        bean.setServiceLocatorInterface(ResourceGettersFactory.class);
+
+        return bean;
+    }
 
 
     @Override
