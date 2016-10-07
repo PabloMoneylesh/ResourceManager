@@ -14,14 +14,27 @@ import static org.junit.Assert.assertEquals;
 @ContextConfiguration(classes = ResorceManagerApplication.class)
 @WebAppConfiguration
 public class ResourceManagerServiceTest {
-
     @Autowired
     ResourceManagerService resourceManagerService;
 
     @Test
     public void getResourceUrl() throws Exception {
         String resourceUrl = resourceManagerService.getResourceUrl("PN0001", "ARTWORK");
-        assertEquals(resourceUrl, "PN0001.PDF");
+        assertEquals("PN0001.PDF", resourceUrl);
+    }
+
+    @Test
+    public void getResourceContentType() throws Exception {
+        String resourceContentType = resourceManagerService.getResourceContentType("ARTWORK");
+        assertEquals("application/pdf", resourceContentType);
+
+    }
+
+    @Test
+    public void getResourceGetterClass() throws Exception {
+        String resourceGetterClass = resourceManagerService.getResourceGetterClass("PN0001", "ARTWORK");
+        assertEquals("FileResource", resourceGetterClass);
+
     }
 
 }

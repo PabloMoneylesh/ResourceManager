@@ -22,8 +22,15 @@ public class ResourceManagerService {
             " and resource_class=?";
 
 
-    public String getResourceUrl(String resKey, String resClass) {
+    private static final String SELECT_RESOURCE_GETTER_CLASS = "select resource_type_getter_class\n" +
+            "from resources r\n" +
+            "join resource_types t on t.resource_type_id = r.resource_type_id\n" +
+            "where resource_key = ?\n" +
+            "and resource_class =?";
 
+    private static final String SELECT_RESOURCE_CONTENT_TYPE = "select resource_content_type from resource_class where resource_class = ?";
+
+    public String getResourceUrl(String resKey, String resClass) {
         Object[] args = new Object[2];
         args[0] = resKey;
         args[1] = resClass;
@@ -40,6 +47,41 @@ public class ResourceManagerService {
 
         return url;
 
+    }
+
+    public String getResourceContentType(String resClass) {
+
+        Object[] args = new Object[1];
+        args[0] = resClass;
+
+
+        String contentType = jdbcTemplate.query(SELECT_RESOURCE_CONTENT_TYPE, args, new ResultSetExtractor<String>() {
+            @Override
+            public String extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                resultSet.next();
+                return resultSet.getString(1);
+            }
+        });
+
+        return contentType;
+
+    }
+
+    public String getResourceGetterClass(String resKey, String resClass) {
+        Object[] args = new Object[2];
+        args[0] = resKey;
+        args[1] = resClass;
+
+
+        String getterClassName = jdbcTemplate.query(SELECT_RESOURCE_GETTER_CLASS, args, new ResultSetExtractor<String>() {
+            @Override
+            public String extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                resultSet.next();
+                return resultSet.getString(1);
+            }
+        });
+
+        return getterClassName;
 
     }
 
