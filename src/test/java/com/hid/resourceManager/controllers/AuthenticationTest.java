@@ -61,6 +61,22 @@ public class AuthenticationTest {
     }
 
     @Test
+    public void nonAuthorizedCantDownloadResource() throws Exception {
+
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/getResource?key=PN0001&class=ARTWORK");
+
+        ResultActions resultActions = mockMvc.perform(requestBuilder);
+        MockHttpServletResponse response = resultActions.andReturn().getResponse();
+        System.out.println("Resul:");
+        System.out.println(response.getContentAsString());
+        System.out.println(response.getRedirectedUrl());
+
+        resultActions.andExpect(status().is(302));
+        resultActions.andExpect(redirectedUrlPattern("**/login"));
+
+    }
+
+    @Test
     public void authorizedShouldByRedirectedToHome() throws Exception {
 
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/").with(user("user"));

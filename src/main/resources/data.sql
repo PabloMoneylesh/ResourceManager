@@ -16,6 +16,9 @@ insert into resources (resource_key, resource_class, resource_type_id, resource_
 values ('PN0002', 'ARTWORK', 1, 'PN0002.PDF');
 
 insert into resources (resource_key, resource_class, resource_type_id, resource_url)
+values ('PN0003', 'ARTWORK', 1, 'PN0003.PDF');
+
+insert into resources (resource_key, resource_class, resource_type_id, resource_url)
 values ('PN0001', 'LOGO', 2, 'PN0001.jpg');
 
 insert into resources (resource_key, resource_class, resource_type_id, resource_url)
