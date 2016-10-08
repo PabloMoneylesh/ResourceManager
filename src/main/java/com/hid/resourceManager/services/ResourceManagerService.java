@@ -40,8 +40,10 @@ public class ResourceManagerService {
         url = jdbcTemplate.query(SELECT_RESOURCE_URL, args, new ResultSetExtractor<String>() {
             @Override
             public String extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-                resultSet.next();
-                return resultSet.getString(1);
+                if (resultSet.next()) {
+                    return resultSet.getString(1);
+                }
+                return null;
             }
         });
 
@@ -58,8 +60,10 @@ public class ResourceManagerService {
         String contentType = jdbcTemplate.query(SELECT_RESOURCE_CONTENT_TYPE, args, new ResultSetExtractor<String>() {
             @Override
             public String extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-                resultSet.next();
-                return resultSet.getString(1);
+                if (resultSet.next()) {
+                    return resultSet.getString(1);
+                }
+                return null;
             }
         });
 
@@ -76,8 +80,10 @@ public class ResourceManagerService {
         String getterClassName = jdbcTemplate.query(SELECT_RESOURCE_GETTER_CLASS, args, new ResultSetExtractor<String>() {
             @Override
             public String extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-                resultSet.next();
-                return resultSet.getString(1);
+                if (resultSet.next()) {
+                    return resultSet.getString(1);
+                }
+                return null;
             }
         });
 

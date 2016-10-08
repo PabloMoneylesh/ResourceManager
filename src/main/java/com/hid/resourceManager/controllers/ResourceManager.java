@@ -32,17 +32,30 @@ public class ResourceManager {
         String resClass = request.getParameter("class");
 
         if (resKey == null || resClass == null) {
-            response.sendError(400);
+            response.sendError(400, "Not Enough params");
             return;
         }
 
 
         String resourceUrl = resourceManagerService.getResourceUrl(resKey, resClass);
+        if (resourceUrl == null) {
+            response.sendError(400, "No resource found");
+            return;
+        }
+
         String resourceGetterClassName = resourceManagerService.getResourceGetterClass(resKey, resClass);
         ResourceGetter resourceGetter = resourceGettersFactory.getResourceGetter(resourceGetterClassName);
 
         String resourceContentType = resourceManagerService.getResourceContentType(resClass);
-        InputStream resourceInputStream = resourceGetter.getResource(resourceUrl);
+        InputStream resourceInputStream = null;
+        try {
+            resourceInputStream = resourceGetter.getResource(resourceUrl);
+        } catch (Exception e) {
+
+            response.sendError(500, e.getMessage());
+            return;
+
+        }
 
         response.setContentType(resourceContentType);
         response.setHeader("Content-disposition", "attachment; filename=" + resourceUrl);

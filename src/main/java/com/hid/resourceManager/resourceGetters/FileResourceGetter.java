@@ -14,6 +14,9 @@ public class FileResourceGetter implements ResourceGetter {
     public InputStream getResource(String url) throws IOException {
 
         File resFile = new File(url);
+        if (!resFile.exists()) {
+            throw new IOException("No file resource found " + url);
+        }
         FileInputStream fis;
         fis = new FileInputStream(resFile);
 

@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.ResultSet;
@@ -21,17 +22,23 @@ public class DBResourceGetter implements ResourceGetter {
     private static final String READ_RESOURCE = "select resource_body from resource_storage where resource_url = ?";
 
     @Override
-    public InputStream getResource(String url) throws SQLException {
+    public InputStream getResource(String url) throws SQLException, IOException {
         Object[] args = new Object[1];
         args[0] = url;
 
         Blob resourceBody = jdbcTemplate.query(READ_RESOURCE, args, new ResultSetExtractor<Blob>() {
             @Override
             public Blob extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-                resultSet.next();
-                return resultSet.getBlob(1);
+                if (resultSet.next()) {
+                    return resultSet.getBlob(1);
+                }
+                return null;
             }
         });
+
+        if (resourceBody == null) {
+            new IOException("No resource found in DB " + url);
+        }
 
         InputStream bis = resourceBody.getBinaryStream();
 
