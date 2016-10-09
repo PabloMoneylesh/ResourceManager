@@ -19,20 +19,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by comp on 09.10.2016.
+ * client example for resource manager application
  */
 public class ResourceClient {
 
     private static final String authenticationURL = "http://localhost:8080/login";
     private static final String downloadURL = "http://localhost:8080/getResource";
 
+    /**
+     * Apache HttpClient for request sending
+     */
     private CloseableHttpClient httpclient;
 
     public ResourceClient() {
         this.httpclient = HttpClients.createDefault();
-        ;
     }
 
+    /**
+     * method downloads the requested resource and prints content to console
+     *
+     * @param resKey
+     * @param resClass
+     * @throws Exception
+     */
     public void downloadResource(String resKey, String resClass) throws Exception {
 
         Header[] cookies = authenticate();
@@ -62,6 +71,11 @@ public class ResourceClient {
     }
 
 
+    /**
+     * authenticates in ResourceManagerApplication by providing user credentials
+     * @return cookies content with sessionId
+     * @throws IOException
+     */
     private Header[] authenticate() throws IOException {
         HttpPost httpPost = new HttpPost(authenticationURL);
         List<NameValuePair> nvps = new ArrayList<NameValuePair>();

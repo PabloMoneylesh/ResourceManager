@@ -18,9 +18,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import javax.sql.DataSource;
 
+/**
+ * provides configuration and defines beans for SpringBoot application
+ */
 @SpringBootApplication
 @Controller
-public class ResorceManagerApplication extends WebMvcConfigurerAdapter {
+public class ResourceManagerApplication extends WebMvcConfigurerAdapter {
 
     @Bean
     public ServiceLocatorFactoryBean busScannerTaskFactoryBean() {
@@ -37,7 +40,7 @@ public class ResorceManagerApplication extends WebMvcConfigurerAdapter {
     }
 
     public static void main(String[] args) throws Exception {
-        new SpringApplicationBuilder(ResorceManagerApplication.class).run(args);
+        new SpringApplicationBuilder(ResourceManagerApplication.class).run(args);
     }
 
     @Configuration

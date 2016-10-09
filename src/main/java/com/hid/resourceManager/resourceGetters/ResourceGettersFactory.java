@@ -1,7 +1,7 @@
 package com.hid.resourceManager.resourceGetters;
 
 /**
- * Created by comp on 07.10.2016.
+ * factory that produces resources getters entities according to given resource class
  */
 public interface ResourceGettersFactory {
 

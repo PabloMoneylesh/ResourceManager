@@ -7,6 +7,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * provides method for reading resource content from file
+ */
 @Service("FileResource")
 public class FileResourceGetter implements ResourceGetter {
 

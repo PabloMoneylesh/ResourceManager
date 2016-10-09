@@ -3,7 +3,7 @@ package com.hid.resourceManager.resourceGetters;
 import java.io.InputStream;
 
 /**
- * Created by comp on 06.10.2016.
+ * defines the interface for different resource getters
  */
 public interface ResourceGetter {
 

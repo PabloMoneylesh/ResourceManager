@@ -12,6 +12,9 @@ import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * provides method for reading resource content from database
+ */
 @Service("DBResource")
 public class DBResourceGetter implements ResourceGetter {
 
@@ -19,8 +22,19 @@ public class DBResourceGetter implements ResourceGetter {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    /**
+     * request content for reading resource
+     */
     private static final String READ_RESOURCE = "select resource_body from resource_storage where resource_url = ?";
 
+    /**
+     * send request to DB for provided resource url
+     *
+     * @param url
+     * @return InputStream to read the resource body
+     * @throws SQLException
+     * @throws IOException
+     */
     @Override
     public InputStream getResource(String url) throws SQLException, IOException {
         Object[] args = new Object[1];

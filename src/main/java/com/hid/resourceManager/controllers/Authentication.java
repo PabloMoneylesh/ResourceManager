@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.Map;
 
 /**
- * Created by comp on 06.10.2016.
+ * controller for app's home page
  */
 @Controller
 public class Authentication {

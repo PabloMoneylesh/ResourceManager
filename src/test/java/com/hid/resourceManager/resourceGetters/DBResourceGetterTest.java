@@ -1,6 +1,6 @@
 package com.hid.resourceManager.resourceGetters;
 
-import com.hid.resourceManager.ResorceManagerApplication;
+import com.hid.resourceManager.ResourceManagerApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import java.io.InputStream;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ResorceManagerApplication.class)
+@ContextConfiguration(classes = ResourceManagerApplication.class)
 @WebAppConfiguration
 public class DBResourceGetterTest {
 

@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * controller for performing requests for resource downloading
+ */
 @Controller
 public class ResourceManager {
 
@@ -25,6 +28,13 @@ public class ResourceManager {
     ResourceManagerService resourceManagerService;
 
 
+    /**
+     * searchs resource by given parameters and if resource found writes it to response
+     *
+     * @param request
+     * @param response
+     * @throws Exception
+     */
     @RequestMapping(value = "/getResource")
     public void downloadResource(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -71,6 +81,11 @@ public class ResourceManager {
 
     }
 
+    /**
+     * reads resource content from storage and writes it to response
+     * @param inputStream
+     * @param outputStream
+     */
     private void writeDataToResponse(InputStream inputStream, OutputStream outputStream) {
 
         try {

@@ -1,6 +1,6 @@
 package com.hid.resourceManager.controllers;
 
-import com.hid.resourceManager.ResorceManagerApplication;
+import com.hid.resourceManager.ResourceManagerApplication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +22,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ResorceManagerApplication.class)
+@ContextConfiguration(classes = ResourceManagerApplication.class)
 @WebAppConfiguration
 public class AuthenticationTest {
 
